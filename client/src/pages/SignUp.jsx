@@ -27,13 +27,14 @@ function SignUp() {
       body: JSON.stringify(formData)
     });
     const data = await res.json();
-    // setLoading(false);
+    setLoading(false);
     console.log(data)
     
     if(data.success===false){
       setError(true);
       setErrorMsg(data.message);
     }
+    else
     navigate('/sign-in');
   }
 

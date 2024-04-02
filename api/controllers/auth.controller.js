@@ -8,7 +8,8 @@ export const signup = async (req,res,next)=>{
   const {username, email, password} = req.body;
   //Missing Details
   if (!username || !email || !password) {
-    return res.status(400).json({ success: false, message: "Missing required fields" });
+    return res.status(400).json({ success: false, 
+    message: "Missing required fields" });
   }
   // Validate email format
   if (!isValidEmail(email)) {
@@ -29,6 +30,10 @@ export const signup = async (req,res,next)=>{
 export const signin = async (req,res,next)=>{
   try{
     const {email, password} = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ success: false, 
+      message: "Missing required fields" });
+    }
     const validUser = await User.findOne({email});
     if(!validUser){
       return next(errorHandler(404,"No such user exists"))
